@@ -9,13 +9,18 @@
 <?php
 session_start();  // 啟動交談期
    // 開啟MySQL的資料庫連接
-   $servename = getenv('servename');
-   $dbname = getenv('dbname');
-   $username = getenv('username');
-   $password = getenv('password');   
-   $link = @mysqli_connect($servename, $username, $password) 
+   $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+   $server = $url["host"];
+   $username = $url["user"];
+   $password = $url["pass"];
+   $db = substr($url["path"], 1);
+   //$servename = getenv('servename');
+  // $dbname = getenv('dbname');
+  // $username = getenv('username');
+  // $password = getenv('password');   
+   $link = @mysqli_connect($server, $username, $password) 
          or die("無法開啟MySQL資料庫連接!<br/>");
-   mysqli_select_db($link, $dbname);  // 選擇myschool資料庫
+   mysqli_select_db($link, $db);  // 選擇myschool資料庫
    //送出UTF8編碼的MySQL指令
    mysqli_query($link, 'SET NAMES utf8'); 
    // 執行SQL查詢
