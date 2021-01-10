@@ -11,10 +11,15 @@ if (!isset($_POST["Delete"])) {
 	include_once("query.php"); //引入檔案，顯示紀錄
 }
 else{
-   // 開啟MySQL的資料庫連接
-   $link = @mysqli_connect("localhost","root","admin") 
+   $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+   $server = $url["host"];
+   $username = $url["user"];
+   $password = $url["pass"];
+   $db = substr($url["path"], 1);
+   // 開啟MySQL的資料庫連接   
+   $link = @mysqli_connect($server, $username, $password) 
          or die("無法開啟MySQL資料庫連接!<br/>");
-   mysqli_select_db($link, "myschool");  // 選擇資料庫
+   mysqli_select_db($link, $db);  // 選擇資料庫
    // 建立刪除記錄的SQL指令字串
    $sql = "DELETE FROM students ";
    $sql.= " WHERE sno = '".$_POST["Sno"]."'";

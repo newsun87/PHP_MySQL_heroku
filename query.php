@@ -13,11 +13,7 @@ session_start();  // 啟動交談期
    $server = $url["host"];
    $username = $url["user"];
    $password = $url["pass"];
-   $db = substr($url["path"], 1);
-   //$servename = getenv('servename');
-  // $dbname = getenv('dbname');
-  // $username = getenv('username');
-  // $password = getenv('password');   
+   $db = substr($url["path"], 1);  
    $link = @mysqli_connect($server, $username, $password) 
          or die("無法開啟MySQL資料庫連接!<br/>");
    mysqli_select_db($link, $db);  // 選擇myschool資料庫
