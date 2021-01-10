@@ -1,5 +1,5 @@
-git config --global user.email 'newsun87@mail.sju.edu.tw'
-git config --global user.name 'newsun87'
+git config --global user.email 'tinaliou4@gmail.com'
+git config --global user.name 'tinaliou4'
 git init
 heroku git:remote -a php-mysql-test-20210111
 git add .
